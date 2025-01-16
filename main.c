@@ -6,7 +6,7 @@
 #include <stdlib.h>
 #include <string.h>
 
-// Définition de la structure Livre
+// DÃ©finition de la structure Livre
 struct Livre {
     int code;               // Code unique du livre
     char titre[100];        // Titre du livre
@@ -18,16 +18,16 @@ void lire_livre(struct Livre *L) {
     printf("Entrez le code du livre : ");
     scanf("%d", &L->code);
     printf("Entrez le titre du livre : ");
-    scanf(" %[^\n]", L->titre); // Lire une chaîne avec des espaces
+    scanf(" %s", L->titre); // Lire une chaÃ®ne avec des espaces
     printf("Entrez le nombre de pages : ");
     scanf("%d", &L->nombre_pages);
 }
 
 // Fonction pour lire une liste de n livres
 struct Livre* lire_liste_livre(int n) {
-    struct Livre* livres = (struct Livre*)malloc(n * sizeof(struct Livre)); // Allouer une zone mémoire pour n livres
+    struct Livre* livres = (struct Livre*)malloc(n * sizeof(struct Livre)); // Allouer une zone mÃ©moire pour n livres
     if (livres == NULL) {
-        printf("Erreur d'allocation mémoire.\n");
+        printf("Erreur d'allocation mÃ©moire.\n");
         exit(1); // Quitte le programme en cas d'erreur
     }
 
@@ -41,7 +41,7 @@ struct Livre* lire_liste_livre(int n) {
 // Fonction pour afficher le titre du livre avec le plus grand et le plus petit nombre de pages
 void afficher_min_max(struct Livre* livres, int taille) {
     if (taille == 0) {
-        printf("La bibliothèque est vide.\n");
+        printf("La bibliothÃ¨que est vide.\n");
         return;
     }
 
@@ -68,7 +68,7 @@ void sauvegarder_livre(struct Livre L) {
         printf("Erreur lors de l'ouverture du fichier.\n");
         return;
     }
-    fprintf(fichier, "%d %s %d\n", L.code, L.titre, L.nombre_pages); // Écrire les données dans le fichier
+    fprintf(fichier, "%d %s %d\n", L.code, L.titre, L.nombre_pages); // Ã‰crire les donnÃ©es dans le fichier
     fclose(fichier); // Fermer le fichier
 }
 
@@ -82,7 +82,7 @@ void lire_fichier_livres() {
 
     printf("\n--- Contenu du fichier Livres.data ---\n");
     struct Livre L;
-    while (fscanf(fichier, "%d %99s %d", &L.code, L.titre, &L.nombre_pages) == 3) { // Lire les données
+    while (fscanf(fichier, "%d %99s %d", &L.code, L.titre, &L.nombre_pages) == 3) { // Lire les donnÃ©es
         printf("Code: %d, Titre: %s, Nombre de pages: %d\n", L.code, L.titre, L.nombre_pages);
     }
 
@@ -110,9 +110,9 @@ int main() {
                 printf("\n--- Ajouter un livre ---\n");
                 lire_livre(&L);
               //  sauvegarder_livre(L);
-                printf("Livre ajouté : %s\n", L.titre);
+                printf("Livre ajoutÃ© : %s\n", L.titre);
 
-                // Sous-menu après l'ajout
+                // Sous-menu aprÃ¨s l'ajout
                 int sous_choix;
                 printf("\nQue souhaitez-vous faire ?\n");
                 printf("1. Afficher tous les livres\n");
@@ -134,16 +134,16 @@ int main() {
                     sauvegarder_livre(livres[i]); // Sauvegarder chaque livre dans le fichier
                 }
 
-                printf("%d livres ajoutés et sauvegardés.\n", n);
-                free(livres); // Libérer la mémoire après utilisation
+                printf("%d livres ajoutÃ©s et sauvegardÃ©s.\n", n);
+                free(livres); // LibÃ©rer la mÃ©moire aprÃ¨s utilisation
                 break;
             }
             case 3: {
-                printf("\nCombien de livres dans la bibliothèque ? ");
+                printf("\nCombien de livres dans la bibliothÃ¨que ? ");
                 scanf("%d", &n);
                 struct Livre* livres = lire_liste_livre(n);
                 afficher_min_max(livres, n);
-                free(livres); // Libérer la mémoire après utilisation
+                free(livres); // LibÃ©rer la mÃ©moire aprÃ¨s utilisation
                 break;
             }
             case 4: {
